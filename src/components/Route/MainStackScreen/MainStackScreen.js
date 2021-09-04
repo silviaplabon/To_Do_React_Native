@@ -48,6 +48,7 @@ export default function MainStackScreen() {
                         }}>
                             <Drawer.Navigator drawerContent={props => <DrawerContent{...props} />}>
                                 <Drawer.Screen name="ProfileScreen" component={ProfileScreen} />
+                                <Drawer.Screen name="HomeScreen" component={HomeScreen} />
                                 <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
                                 <Drawer.Screen name="Home" component={HomeScreen} />
                                 <Drawer.Screen name="ExploreScreen" component={ExploreScreen} />

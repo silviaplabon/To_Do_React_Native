@@ -14,7 +14,7 @@ import NavigationService from '../../../Services/NavigationService';
 const DrawerContent = (props) => {
     const auths = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+    const themes = useSelector((state) => state.themes);
    
     const signOutUser = () => {
         auth.signOut().then(() => {
@@ -28,7 +28,7 @@ const DrawerContent = (props) => {
     return (
         <>{
             auth.username ?<MainStackScreen></MainStackScreen>:
-        <View style={{ flex: 1, backgroundColor:'red'}}>
+        <View style={{ flex: 1, backgroundColor:themes.drawerBgColor}}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.DrawerContent}>
                     <View style={styles.userInfoSection}>

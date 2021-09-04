@@ -2,82 +2,75 @@ import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Subtitle from '../../../EmotionComponents/Subtitle';
 import Title from '../../../EmotionComponents/Title';
+import SettingsThemeDetails from '../SettingsThemeDetails/SettingsThemeDetails';
 import SettingsThemeShow from '../SettingsThemeShow/SettingsThemeShow';
 import Container from './../../../EmotionComponents/Container';
+import { Colors } from 'react-native-paper';
 
 
 const SettingsTheme = () => {
 
-    const color = [
-        { id: 1, name: 'primary', textColor: '#6200EE', buttonBgColor: '#6200EE', themeBgColor:'black', drawerBgColor:'black'},
-        { id: 2, name: 'secondary', textColor: '#000000', buttonBgColor: '#03DAc6',  themeBgColor:'black', drawerBgColor:'black' },
-        { id: 3, name: 'danger', textColor: '#000000', buttonBgColor: '#B00020',  themeBgColor:'black', drawerBgColor:'black' },
-        { id: 4, name: 'dark', textColor: '#000000', buttonBgColor: 'black' , themeBgColor:'black', drawerBgColor:'black'},
+    const colors = [
+        {
+            id: 1,
+            name:'Living Coral',
+            color:'#FC766AFF'
+        },
+        {
+            id: 2,
+            name:'Turquoise ',
+            color:'#42EADDFF'
+        },
+        {
+            id: 3,
+            name:'Blue',
+            color:'#00A4CCFF'
+        },
+        {
+            id: 4, 
+            name:'Orange',
+            color:'#F95700FF'
+        },
+        {
+            id: 5,
+            name:'Sailor Blue',
+            color:'#00203FFF'
+        },
+        {
+            id: 6,
+            name:'Blazing Yellor',
+            color:'#FEE715FF'
+        },
+        {
+            id: 7,
+            name:'Space Cherry',
+            color:'#990011ff'
+        },
+        {
+            id: 8, 
+            name:'Dark Green',
+            color:'#006b38ff'
+        },
+        {
+            id: 9,
+            name:'Deep Blue',
+            color:'#2460A7FF'
+        },
+        {
+            id: 10, 
+            name:'Blue',
+            color:'#011936FF'
+        },
+
     ]
 
 
     return (
         <Container>
-            <Title text="Please select a Text color" textColor="lavenderblush" />
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    marginTop: 5,
-                    paddingBottom: 5,
-                }}
-                numColumns={4}
-                keyExtractor={(item) => `${item.id}`}
-                data={color}
-                renderItem={itemData =>
-                    <SettingsThemeShow data={itemData.item.textColor}  title={itemData.item.name}  id={itemData.item.id} state={1}></SettingsThemeShow>
-                }
-            >
-            </FlatList>
-            <Title text="Please select a Theme color" textColor="lavenderblush" />
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    marginTop: 5,
-                    paddingBottom: 5,
-                }}
-                numColumns={4}
-                keyExtractor={(item) => `${item.id}`}
-                data={color}
-                renderItem={itemData =>
-                    <SettingsThemeShow data={itemData.item.themeBgColor}  title={itemData.item.name}  id={itemData.item.id} state={2} ></SettingsThemeShow>
-                }
-            >
-            </FlatList>
-            <Title text="Please select a Button color" textColor="lavenderblush" />
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    marginTop: 5,
-                    paddingBottom: 5,
-                }}
-                numColumns={4}
-                keyExtractor={(item) => `${item.id}`}
-                data={color}
-                renderItem={itemData =>
-                    <SettingsThemeShow data={itemData.item.buttonBgColor} title={itemData.item.name} id={itemData.item.id} state={3}></SettingsThemeShow>
-                }
-            >
-            </FlatList>
-            <Title text="Please select a Drawer color" textColor="lavenderblush" />
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    marginTop: 5,
-                    paddingBottom: 5,
-                }}
-                numColumns={4}
-                keyExtractor={(item) => `${item.id}`}
-                data={color}
-                renderItem={itemData =>
-                    <SettingsThemeShow data={itemData.item.drawerBgColor}  title={itemData.item.name}  id={itemData.item.id} state={4} ></SettingsThemeShow>
-                }
-            >
-            </FlatList>
+            <SettingsThemeShow state={1} colors={colors} type="Text Color"></SettingsThemeShow>
+            <SettingsThemeShow state={2} colors={colors} type="Button Color"></SettingsThemeShow>
+            <SettingsThemeShow state={3} colors={colors} type="Theme Color"></SettingsThemeShow>
+            <SettingsThemeShow state={4} colors={colors} type="Drawer Color"></SettingsThemeShow>
         </Container>
     );
 };

@@ -21,10 +21,8 @@ const styles = EStyleSheet.create({
 const ProfileScreen = () => {
     const dispatch = useDispatch();
     const themes = useSelector((state) => state.themes);
-    console.log(themes, "themes color code fro updating")
-
     return (
-        <Container>
+        <Container colorName={themes.themeBgColor} >
             <ScrollView>
                 <GetToDoDatabase></GetToDoDatabase>
                 <AddTodoForm></AddTodoForm>

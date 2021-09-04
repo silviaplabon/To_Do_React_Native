@@ -2,19 +2,19 @@ import React from "react"
 import styled, { css } from "@emotion/native"
 
 const Container = props => {
+    console.log(props.colorName,"containr")
     return(
-        <ContainerArea >{props.children}</ContainerArea>
+        <ContainerArea  colorName={props.colorName} >{props.children}</ContainerArea>
 
     ) 
 }
 export default Container;
 
 const ContainerArea = styled.View`
-background: #fff;
+background: ${props => props.colorName};
 height: 100%;
 width: 100%;
 display:flex;
 flex:1;
-justify-content:center;
-align-items:center;
+
 `

@@ -11,7 +11,6 @@ const DetailsScreen = () => {
     return (
       <View>
             <TodoList></TodoList>
-          
         </View>
     );
 };

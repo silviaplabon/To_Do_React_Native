@@ -6,6 +6,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native';
 import AddTodoForm from '../ToDo/AddToDoForm/AddToDoForm';
+import { useDispatch, useSelector } from 'react-redux';
 
 const styles = EStyleSheet.create({
     scrollStyle: {
@@ -23,14 +24,20 @@ const styles = EStyleSheet.create({
 });
 
 const DetailsScreen = () => {
+    const dispatch = useDispatch();
+    const themes = useSelector((state) => state.themes);
+
+
     return (
-        <ScrollView style={styles.scrollStyle}>
+        <Container colorName={themes.themeBgColor}>
+        <ScrollView >
             <AddTodoForm></AddTodoForm>
             <TodoList></TodoList>
             <View style={styles.toDoContainer}>
                 <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor='#01d1e5' backgroundColor='lavenderblush' />
             </View>
       </ScrollView>
+      </Container>
     );
 };
  export default DetailsScreen;

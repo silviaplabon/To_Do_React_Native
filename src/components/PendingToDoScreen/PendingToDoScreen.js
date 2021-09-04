@@ -5,11 +5,14 @@ import CustomButtonNavigate from '../../EmotionComponents/CustomButtonNavigate';
 import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 import ToDoItem from '../ToDo/ToDoItem/ToDoItem';
 
+
 const PendingToDoScreen = () => {
     const todos = useSelector((state) =>
         state.todos.filter((todo) => todo.completed !== true)
     );
+    const themes = useSelector((state) => state.themes);
     return (
+        <Container  colorName={themes.themeBgColor}>
         <ScrollView>
             <FlatList style={styles.cardContainer}
                 showsVerticalScrollIndicator={false}
@@ -28,6 +31,7 @@ const PendingToDoScreen = () => {
                 <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor='white' backgroundColor='#3b3b3b' />
             </View>
         </ScrollView>
+        </Container>
 
     );
 };
