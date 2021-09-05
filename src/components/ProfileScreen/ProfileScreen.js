@@ -25,7 +25,7 @@ const ProfileScreen = () => {
         <Container colorName={themes.themeBgColor} >
             <ScrollView>
                 <GetToDoDatabase></GetToDoDatabase>
-                <AddTodoForm></AddTodoForm>
+                {/* <AddTodoForm></AddTodoForm> */}
                 <TodoList></TodoList>
                 <View style={styles.homeButton}>
                     <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor} />

@@ -2,26 +2,29 @@ import React from "react"
 import styled, { css } from "@emotion/native"
 
 const Card = props => (
-    <CardContainer></CardContainer>
+    <CardContainer bgColor={props.bgColor} height={props.height} direction={props.direction}>{props.children}</CardContainer>
 )
 
 export default Card;
 
 const CardContainer = styled.View`
-    flex: 1,
-    width: '90%',
-    height:10,
-    alignItems: 'center',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.20,
-    elevation: 8,
-    borderRadius: 10,
-    margin: 1,
-    color:${props=>props.textColor}
-    flexDirection:  ${props => props.flexDirection}||'row'
-    border-radius: 10px;    
-    background-color: ${props => props.backgroundColor};
+  flex:1;
+  display:flex;
+  flex-direction:${props => props.direction};;
+  width: 90%;
+  height:${props => props.height};
+  background-color:${props => props.bgColor};
+  justify-content:space-between;
+  shadow-color: black;
+  shadow-offset: 10px;
+  shadow-radius: 6px;
+  shadow-opacity: 0.20;
+  elevation: 8;
+  margin-top:5px;
+  border-radius: 10px;
+  margin-left: 5%;
+  margin-bottom: 3px;
+  margin-right: 5%;
 `
+
 

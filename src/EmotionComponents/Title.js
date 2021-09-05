@@ -7,7 +7,7 @@ const Title = props => (
 export default Title;
 
 const TitleText = styled.Text`
-    font-size:26px;
+    font-size:35px;
 	color: ${props => props.textColor};
 	text-align: center;
     font-weight:600

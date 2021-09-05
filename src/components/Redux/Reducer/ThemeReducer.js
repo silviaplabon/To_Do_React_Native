@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-  textColor:"black",
-  themeBgColor:"white",
-  buttonBgColor:'#212729',
-  drawerBgColor:'red'
+  textColor:"white",
+  themeBgColor:"#011936",
+  buttonBgColor:'#F9DC5c',
+  drawerBgColor:'#2460A7'
 }
 const ThemeReducer=createSlice({
      name:"theme",

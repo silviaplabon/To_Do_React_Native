@@ -2,7 +2,6 @@ import React from "react"
 import styled, { css } from "@emotion/native"
 
 const Container = props => {
-    console.log(props.colorName,"containr")
     return(
         <ContainerArea  colorName={props.colorName} >{props.children}</ContainerArea>
 

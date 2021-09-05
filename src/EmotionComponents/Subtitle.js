@@ -7,7 +7,7 @@ const Subtitle = props => (
 export default Subtitle;
 
 const SubtitleText = styled.Text`
-	font-size:15px;
+	font-size:20px;
 	color: ${props => props.textColor};
 	text-align: center;
     margin-bottom:14px;

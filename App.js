@@ -13,9 +13,6 @@ export const db = openDatabase({
   name: 'todoCollection',
 });
 enablePromise(true);
-EStyleSheet.build({ 
-  $BgColorBody: '#ffc30b'
-});
 
 const App = () => {
   useEffect(() => {

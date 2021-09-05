@@ -17,7 +17,10 @@ import { useEffect, useState } from 'react';
 import HomeScreen from './../../HomeScreen/HomeScreen';
 import { createContext } from 'react';
 import NavigationService from '../../../Services/NavigationService';
-import SettingsTheme from '../../SettingsTheme/SettingsTheme/SettingsTheme';
+import ThemeChanger from './../../SettingsTheme/ThemeChanger/ThemeChanger';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import AddTodoForm from '../../ToDo/AddToDoForm/AddToDoForm';
+
 
 const Drawer = createDrawerNavigator();
 const RootStack = createNativeStackNavigator();
@@ -28,8 +31,22 @@ export const ToDoListContext = createContext();
 
 export default function MainStackScreen() {
     const [results, setResults] = useState([]);
-  
+
     const auth = useSelector((state) => state.auth);
+    const themes = useSelector((state) => state.themes);
+    useEffect(() => {
+        EStyleSheet.build({
+            $textColor: themes.textColor,
+            $buttonColor: themes.buttonBgColor,
+            $drawerColor: themes.drawerBgColor,
+            $themeColor: themes.themeBgColor
+        });
+        console.log(themes.textColor,themes.buttonBgColor,themes.drawerBgColor,"app.js")
+    }, [themes])
+
+
+
+
     return (
         <>
             {
@@ -52,9 +69,10 @@ export default function MainStackScreen() {
                                 <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
                                 <Drawer.Screen name="Home" component={HomeScreen} />
                                 <Drawer.Screen name="ExploreScreen" component={ExploreScreen} />
+                                <Drawer.Screen name="AddToDoScreen" component={AddTodoForm} />
                                 <Drawer.Screen name="CompletedScreen" component={CompletedToDoScreen} />
                                 <Drawer.Screen name="PendingScreen" component={PendingToDoScreen} />
-                                <Drawer.Screen name="SettingsTheme" component={SettingsTheme} />
+                                <Drawer.Screen name="ThemeChanger" component={ThemeChanger} />
                                 <Drawer.Screen name="MainStackScreen" component={MainStackScreen} />
                             </Drawer.Navigator>
                         </NavigationContainer>

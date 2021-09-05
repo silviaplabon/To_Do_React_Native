@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { KeyboardAvoidingView, ImageBackground } from 'react-native'
 import { StyleSheet, View } from 'react-native'
-import { Button, Input, Text } from 'react-native-elements'
+import { Button, Input, Text } from 'react-native'
 
 import { auth } from '../../firebase'
 import { navigate } from '../components/Route/RootNavigation/RootNavigation'

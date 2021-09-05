@@ -34,7 +34,7 @@ const DetailsScreen = () => {
             <AddTodoForm></AddTodoForm>
             <TodoList></TodoList>
             <View style={styles.toDoContainer}>
-                <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor='#01d1e5' backgroundColor='lavenderblush' />
+                <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor}/>
             </View>
       </ScrollView>
       </Container>

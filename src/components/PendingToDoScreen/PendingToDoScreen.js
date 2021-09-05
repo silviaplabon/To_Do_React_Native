@@ -28,7 +28,7 @@ const PendingToDoScreen = () => {
             >
             </FlatList>
             <View style={styles.buttonHome}>
-                <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor='white' backgroundColor='#3b3b3b' />
+                <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor} />
             </View>
         </ScrollView>
         </Container>

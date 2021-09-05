@@ -8,15 +8,14 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { db } from './../../../../App';
+import ThemeBySideShow from '../../SettingsTheme/Side/ThemeBySideShow/ThemeBySideShow';
+import Card from '../../../EmotionComponents/Card';
 
 const styles = EStyleSheet.create({
-	$textColor: '#0275d8',
 	addBtn: {
 		width: 90,
 		height: 40,
 		marginTop: 10,
-		marginBottom: 10,
-		backgroundColor: 'white',
 		borderRadius: 10
 	},
 	touchableStyle: {
@@ -24,21 +23,20 @@ const styles = EStyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '$BgColorBody',
+		backgroundColor: '$buttonColor',
 		padding: 9,
 		borderRadius: 20
 	},
 	addItemText: {
-		color: 'white',
 		fontSize: 20,
 	},
 	textInputStyle: {
 		height: 50,
-		padding: 8,
-		margin: 5,
-		fontSize: 16,
-		backgroundColor: '#fff',
-		color: 'black'
+		padding: 10,
+		fontSize: 18,
+		fontWeight:'800',
+		marginBottom:5,
+		
 	}
 })
 
@@ -48,6 +46,7 @@ const AddTodoForm = () => {
 	const [idData, setIdData] = useState('')
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
+	const themes= useSelector((state) => state.themes);
 
 
 	const submitButtonClick = () => {
@@ -80,22 +79,24 @@ const AddTodoForm = () => {
 		}
 	};
 	return (
-		<View >
+		<Card  bgColor={themes.drawerBgColor} height='200px'>
 			<TextInput
-				style={styles.textInputStyle}
+				style={[styles.textInputStyle,{backgroundColor: themes.buttonBgColor, color: themes.textColor}]}
 				onChangeText={title => setTodoTitle(title)}
 				value={todoTitle}
 				placeholder="ADD TO DO....."
+				placeholderTextColor={themes.textColor} 
 				keyboardType="default"
+				tintColors='#F15927'
 			/>
-			<TouchableOpacity onPress={() => submitButtonClick()} style={styles.touchableStyle}>
+			<TouchableOpacity onPress={() => submitButtonClick()} style={[styles.touchableStyle,{backgroundColor:themes.buttonBgColor}]}>
 				<Icon name="plus"
-					color='white'
+					color={themes.textColor}
 					size={25}
 				/>
-				<Text style={styles.addItemText}>Add Item</Text>
+				<Text style={[styles.addItemText,{color:themes.textColor}]}>Add Item</Text>
 			</TouchableOpacity>
-		</View>
+		</Card>
 	);
 };
 

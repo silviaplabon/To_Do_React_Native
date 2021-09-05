@@ -9,8 +9,8 @@ export default DescriptionTag;
 
 
 const Description = styled.Text`
-    font-size:12px;
-	font-weight: 400;
-	color: black;
+    font-size:15px;
+	font-weight: 500;
+	color: ${props => props.textColor};
 	text-align: center;
 `
