@@ -48,19 +48,16 @@ const Login = ({navigation}) => {
                     onSubmitEditing={signIn}
                 />
             </View>
-            <Button title="Login" titleStyle={{ color: 'white' }} type="outline" containerStyle={styles.authBtn} onPress={signIn} />
+            <Button title="Login" titleStyle={{ color: 'white' }} type="outline" containerStyle={styles.authBtn} onPress={()=>signIn()} />
             <View style={{ height: 5 }}></View>
             <View style={styles.registerSection}>
                 <Text > Don't have an account? </Text>
-                <Button onPress={() => navigate('Register')} type="clear" titleStyle={{ color: 'black' }} title="SignUp" />
+                <Button onPress={() => NavigationService.navigate('Register')} type="clear" titleStyle={{ color: 'black' }} title="SignUp" />
             </View>
 
         </KeyboardAvoidingView>
     )
 }
-
-export default Login;
-
 const styles = StyleSheet.create({
     registerSection:{
         flexDirection:'row',
@@ -98,3 +95,7 @@ const styles = StyleSheet.create({
         margin: 10
     }
 })
+
+
+export default Login;
+

@@ -2,11 +2,11 @@ import NavigationService from '../Services/NavigationService';
 import { db } from './../../App';
 
 export const  DeleteToDoData=(props)=>{
-    const {id}=props;
+    const {_id}=props;
     db.transaction((tx) => {
     tx.executeSql(
-      'DELETE FROM  todoList where id=?',
-      [id],
+      'DELETE FROM ListToDo where _id=?',
+      [_id],
       (tx, results) => {
         console.log('Results', results.rowsAffected);
         if (results.rowsAffected > 0) {

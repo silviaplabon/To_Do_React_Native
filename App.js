@@ -9,6 +9,7 @@ import { store } from './src/components/Redux/Reducer/Store'
 import { getToDoDatabase } from './src/SqliteDatabase/GetToDoDatabase';
 import { getToDo } from './src/components/Redux/Reducer/ToDoReducer';
 
+
 export const db = openDatabase({
   name: 'todoCollection',
 });
@@ -18,6 +19,7 @@ const App = () => {
   useEffect(() => {
     createTables()
   }, [])
+  
 
   return (
     <Provider store={store}>

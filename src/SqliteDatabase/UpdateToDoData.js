@@ -1,11 +1,12 @@
 import NavigationService from '../Services/NavigationService';
 import { db } from './../../App';
 export const UpdateToDoData=(props)=>{
-    const {id,completed}=props;
+    const {_id,completed}=props;
+
     db.transaction((tx) => {
     tx.executeSql(
-      'UPDATE todoList set completed=? where id=?',
-      [completed,id],
+      'UPDATE ListToDo set completed=? where _id=?',
+      [completed,_id],
       (tx, results) => {
         console.log('Results', results.rowsAffected);
         if (results.rowsAffected > 0) {

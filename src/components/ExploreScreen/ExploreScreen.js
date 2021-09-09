@@ -7,20 +7,22 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native';
 import AddTodoForm from '../ToDo/AddToDoForm/AddToDoForm';
 import { useDispatch, useSelector } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const styles = EStyleSheet.create({
     scrollStyle: {
         backgroundColor: '#fff',
-        flex:1
-    },  
-     toDoContainer: {
+        flex: 1
+    },
+    toDoContainer: {
         height: 100,
-        width:'90%',
-        margin:'5%',
+        width: '90%',
+        margin: '5%',
         justifyContent: 'center',
         alignItems: 'center'
     }
-   
+
 });
 
 const DetailsScreen = () => {
@@ -30,14 +32,14 @@ const DetailsScreen = () => {
 
     return (
         <Container colorName={themes.themeBgColor}>
-        <ScrollView >
-            <AddTodoForm></AddTodoForm>
-            <TodoList></TodoList>
-            <View style={styles.toDoContainer}>
-                <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor}/>
-            </View>
-      </ScrollView>
-      </Container>
+            <SafeAreaView style={{ flex: 1 }}>
+                {/* <AddTodoForm></AddTodoForm> */}
+                <TodoList></TodoList>
+                <View style={styles.toDoContainer}>
+                    <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor} />
+                </View>
+            </SafeAreaView>
+        </Container>
     );
 };
- export default DetailsScreen;
+export default DetailsScreen;

@@ -1,9 +1,8 @@
-
 import { db } from './../../App';
 export const createTables = () => {
     db.transaction(txn => {
       txn.executeSql(
-        `CREATE TABLE IF NOT EXISTS todoList (id INTEGER PRIMARY KEY , title VARCHAR(20), completed int(1))`,
+        `CREATE TABLE IF NOT EXISTS ListToDo (_id VARCHAR(30), id  INTEGER PRIMARY KEY , syncTime int(30), title VARCHAR(25), completed int(1), email VARCHAR(30), sync int(1))`,
         [],
         (sqlTxn, res) => {
           console.log('table created successfully');

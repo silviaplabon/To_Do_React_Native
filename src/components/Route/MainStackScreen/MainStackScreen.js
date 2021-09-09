@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import MainTabScreen from '../MainTabScreen/MainTabScreen';
 import ProfileScreen from '../../ProfileScreen/ProfileScreen';
 import ExploreScreen from '../../ExploreScreen/ExploreScreen';
@@ -20,18 +20,16 @@ import NavigationService from '../../../Services/NavigationService';
 import ThemeChanger from './../../SettingsTheme/ThemeChanger/ThemeChanger';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import AddTodoForm from '../../ToDo/AddToDoForm/AddToDoForm';
-
-
+import  NetInfo  from '@react-native-community/netinfo';
+import { getToDoAsync } from '../../Redux/Reducer/ToDoReducer';
 const Drawer = createDrawerNavigator();
 const RootStack = createNativeStackNavigator();
-
-
-export const ToDoListContext = createContext();
+export const ResultContext = createContext();
 
 
 export default function MainStackScreen() {
     const [results, setResults] = useState([]);
-
+const dispatch=useDispatch();
     const auth = useSelector((state) => state.auth);
     const themes = useSelector((state) => state.themes);
     useEffect(() => {
@@ -44,22 +42,26 @@ export default function MainStackScreen() {
         console.log(themes.textColor,themes.buttonBgColor,themes.drawerBgColor,"app.js")
     }, [themes])
 
-
-
+useEffect(()=>{
+    dispatch(getToDoAsync({ email: auth.email }))
+    console.log('dispatch executed')
+},[])
 
     return (
         <>
             {
                 (!auth.username && !auth.email)
                     ?
-                    <NavigationContainer ref={navigationRef}>
+                    <NavigationContainer ref={navigatorRef => {
+                        NavigationService.setTopLevelNavigator(navigatorRef);
+                    }}>
                         <RootStack.Navigator headerMode="none">
                             <RootStack.Screen name="Login" component={Login}></RootStack.Screen>
                             <RootStack.Screen name="Register" component={Register}></RootStack.Screen>
                         </RootStack.Navigator>
                     </NavigationContainer>
                     :
-                    <ToDoListContext.Provider value={[results, setResults]}>
+                    <ResultContext.Provider value={[results,setResults]}>
                         <NavigationContainer ref={navigatorRef => {
                             NavigationService.setTopLevelNavigator(navigatorRef);
                         }}>
@@ -76,7 +78,7 @@ export default function MainStackScreen() {
                                 <Drawer.Screen name="MainStackScreen" component={MainStackScreen} />
                             </Drawer.Navigator>
                         </NavigationContainer>
-                    </ToDoListContext.Provider>
+                    </ResultContext.Provider>
             }
         </>
     );

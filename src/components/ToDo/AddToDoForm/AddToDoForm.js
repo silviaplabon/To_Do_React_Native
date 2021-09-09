@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextInput, TouchableOpacity, View, Text } from 'react-native';
-import styled, { css } from '@emotion/native'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToDo,  getToDo } from '../../Redux/Reducer/ToDoReducer';
-import Container from '../../../EmotionComponents/Container';
-import { Button } from 'react-native-elements';
+import { addToDo, addToDoAsync, getToDo } from '../../Redux/Reducer/ToDoReducer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import EStyleSheet from 'react-native-extended-stylesheet';
-import { db } from './../../../../App';
-import ThemeBySideShow from '../../SettingsTheme/Side/ThemeBySideShow/ThemeBySideShow';
 import Card from '../../../EmotionComponents/Card';
+
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { addTodoDatabase } from '../../../SqliteDatabase/AddTodoDatabase';
+import NetInfo from '@react-native-community/netinfo';
 
 const styles = EStyleSheet.create({
 	addBtn: {
@@ -34,9 +32,9 @@ const styles = EStyleSheet.create({
 		height: 50,
 		padding: 10,
 		fontSize: 18,
-		fontWeight:'800',
-		marginBottom:5,
-		
+		fontWeight: '800',
+		marginBottom: 5,
+
 	}
 })
 
@@ -46,55 +44,42 @@ const AddTodoForm = () => {
 	const [idData, setIdData] = useState('')
 	const dispatch = useDispatch();
 	const auth = useSelector((state) => state.auth);
-	const themes= useSelector((state) => state.themes);
+	const themes = useSelector((state) => state.themes);
 
 
 	const submitButtonClick = () => {
-		const newId=new Date().valueOf();
-		if (todoTitle) {
-			db.transaction(txn => {
-				txn.executeSql(
-					`INSERT INTO todoList (id, title,completed) VALUES (?,?,0)`,
-					[newId,todoTitle],
-					(sqlTxn, res) => {
-						console.log(`To Do  added successfully`, res,sqlTxn);
-						console.log(newId);
-						setIdData(res.insertId);
-						console.log(idData,"idData")
-					},
-					error => {
-						console.log('error on adding todo  ' + error.message);
-					},
-				);
-			});
-		}
-		console.log(idData,"idData missing")
-		if(idData){
-			dispatch(
-				addToDo({
-					title: todoTitle,
-					id:idData,
-				})
-			);
-		}
+		const syncTimes = new Date().getTime();
+
+		NetInfo.fetch().then(networkState => {
+			if (networkState.isConnected == true && networkState.isInternetReachable==true) {
+				dispatch(addToDoAsync({ id:syncTimes,sync: 1, title: todoTitle,  syncTime: syncTimes, completed: 0, email: auth.email, }))
+				// addTodoDatabase({_id: syncTime, title: todoTitle, completed: 0, email: auth.email, sync: 1	})
+
+			}
+			else {
+				console.log('net connection is off , so i am saving it to the local database')
+				// addTodoDatabase({_id: syncTime, title: todoTitle, completed: 0, email: auth.email, sync: 0	})
+				dispatch(addToDo({ syncTime: syncTimes, title: todoTitle, completed: 0, email: auth.email, sync: 0 }))
+			}
+		});
 	};
 	return (
-		<Card  bgColor={themes.drawerBgColor} height='200px'>
+		<Card  >
 			<TextInput
-				style={[styles.textInputStyle,{backgroundColor: themes.buttonBgColor, color: themes.textColor}]}
+				style={[styles.textInputStyle, { backgroundColor: themes.buttonBgColor, color: themes.textColor }]}
 				onChangeText={title => setTodoTitle(title)}
 				value={todoTitle}
 				placeholder="ADD TO DO....."
-				placeholderTextColor={themes.textColor} 
+				placeholderTextColor={themes.textColor}
 				keyboardType="default"
 				tintColors='#F15927'
 			/>
-			<TouchableOpacity onPress={() => submitButtonClick()} style={[styles.touchableStyle,{backgroundColor:themes.buttonBgColor}]}>
+			<TouchableOpacity onPress={() => submitButtonClick()} style={[styles.touchableStyle, { backgroundColor: themes.buttonBgColor }]}>
 				<Icon name="plus"
 					color={themes.textColor}
 					size={25}
 				/>
-				<Text style={[styles.addItemText,{color:themes.textColor}]}>Add Item</Text>
+				<Text style={[styles.addItemText, { color: themes.textColor }]}>Add Item</Text>
 			</TouchableOpacity>
 		</Card>
 	);

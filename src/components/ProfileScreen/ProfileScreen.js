@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import GetToDoDatabase from '../../SqliteDatabase/GetToDoDatabase';
 import { useDispatch, useSelector } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const styles = EStyleSheet.create({
@@ -23,14 +24,13 @@ const ProfileScreen = () => {
     const themes = useSelector((state) => state.themes);
     return (
         <Container colorName={themes.themeBgColor} >
-            <ScrollView>
-                <GetToDoDatabase></GetToDoDatabase>
+         <SafeAreaView style={{flex: 1}}>
                 {/* <AddTodoForm></AddTodoForm> */}
                 <TodoList></TodoList>
                 <View style={styles.homeButton}>
                     <CustomButtonNavigate title='Home' task="Home" navigate='true' textColor={themes.textColor} backgroundColor={themes.buttonBgColor} />
                 </View>
-            </ScrollView>
+          </SafeAreaView>
         </Container>
     );
 };

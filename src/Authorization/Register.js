@@ -3,8 +3,9 @@ import { KeyboardAvoidingView, ImageBackground } from 'react-native'
 import { StyleSheet, View } from 'react-native'
 import { Button, Input, Text } from 'react-native'
 
+
 import { auth } from '../../firebase'
-import { navigate } from '../components/Route/RootNavigation/RootNavigation'
+import NavigationService from '../Services/NavigationService'
 
 
 const Register = () => {
@@ -63,13 +64,13 @@ const Register = () => {
             <View style={{ height: 5 }}></View>
             <View style={styles.loginSection}>
                 <Text > Have an account ? </Text>
-                <Button title="Login" titleStyle={{ color: 'black' }} type="outline"  onPress={() => navigate('Login')} />
+                <Button title="Login" titleStyle={{ color: 'black' }} type="outline"  onPress={() => NavigationService.navigate('Login')} />
             </View>
         </KeyboardAvoidingView>
     )
 }
 
-export default Register
+export default Register;
 
 const styles = StyleSheet.create({
     loginSection:{
