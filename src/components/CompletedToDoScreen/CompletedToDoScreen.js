@@ -22,10 +22,10 @@ const CompletedToDoScreen = (props) => {
                         marginTop: 10,
                         paddingBottom: 50,
                     }}
-                    keyExtractor={(item) => `${item._id}`}
+                    keyExtractor={(item) => `${item.id}`}
                     data={todos}
                     renderItem={itemData =>
-                        <ToDoItem todoData={itemData.item} id={itemData.item._id} state={false}></ToDoItem>
+                        <ToDoItem todoData={itemData.item} id={itemData.item.id} state={false}></ToDoItem>
                     }
                 >
                 </FlatList>

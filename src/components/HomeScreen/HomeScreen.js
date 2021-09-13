@@ -48,7 +48,7 @@ const HomeScreen = () => {
                         source={{ uri: 'https://i.ibb.co/MP7zHR0/download-removebg-preview.png' }}
                     />
                     <View style={{ paddingRight: 50, marginTop: 0, paddingTop: 0,borderRadius:50 }}>
-                        <TouchableOpacity onPress={() => NavigationService.navigate('ExploreScreen')} style={[styles.touchableStyle, { backgroundColor: themes.buttonBgColor,borderRadius:50 }]}>
+                        <TouchableOpacity onPress={() => NavigationService.navigate('AddToDoScreen')} style={[styles.touchableStyle, { backgroundColor: themes.buttonBgColor,borderRadius:50 }]}>
                             <Icon name="plus"
                                 color='white'
                                 size={40}

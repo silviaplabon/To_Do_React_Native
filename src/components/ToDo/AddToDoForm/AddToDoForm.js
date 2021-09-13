@@ -8,6 +8,8 @@ import Card from '../../../EmotionComponents/Card';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { addTodoDatabase } from '../../../SqliteDatabase/AddTodoDatabase';
 import NetInfo from '@react-native-community/netinfo';
+import { NavigationContainer } from '@react-navigation/native';
+import NavigationService from '../../../Services/NavigationService';
 
 const styles = EStyleSheet.create({
 	addBtn: {
@@ -48,18 +50,18 @@ const AddTodoForm = () => {
 
 
 	const submitButtonClick = () => {
-		const syncTimes = new Date().getTime();
-
 		NetInfo.fetch().then(networkState => {
+			let syncTimes= new Date().getTime();
 			if (networkState.isConnected == true && networkState.isInternetReachable==true) {
-				dispatch(addToDoAsync({ id:syncTimes,sync: 1, title: todoTitle,  syncTime: syncTimes, completed: 0, email: auth.email, }))
+				dispatch(addToDoAsync({ id:syncTimes, sync: 1, title: todoTitle,  syncTime: syncTimes, completed: 0, email: auth.email, }))
+				NavigationService.navigate('ProfileScreen')
 				// addTodoDatabase({_id: syncTime, title: todoTitle, completed: 0, email: auth.email, sync: 1	})
-
 			}
 			else {
 				console.log('net connection is off , so i am saving it to the local database')
 				// addTodoDatabase({_id: syncTime, title: todoTitle, completed: 0, email: auth.email, sync: 0	})
-				dispatch(addToDo({ syncTime: syncTimes, title: todoTitle, completed: 0, email: auth.email, sync: 0 }))
+				dispatch(addToDo({_id:syncTimes, id:syncTimes, sync: 0, title: todoTitle,  syncTime: syncTimes, completed: 0, email: auth.email, }))
+				NavigationService.navigate('ProfileScreen')
 			}
 		});
 	};

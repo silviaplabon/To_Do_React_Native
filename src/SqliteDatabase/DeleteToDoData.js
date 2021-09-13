@@ -2,6 +2,7 @@ import NavigationService from '../Services/NavigationService';
 import { db } from './../../App';
 
 export const  DeleteToDoData=(props)=>{
+
     const {_id}=props;
     db.transaction((tx) => {
     tx.executeSql(
